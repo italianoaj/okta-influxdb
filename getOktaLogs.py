@@ -17,7 +17,7 @@ mail=smtplib.SMTP(mailserver,port)
 #get email address
 FP=open('../sec/email-address', 'r')
 address=FP.readline()
-to=address.strip()
+to="anthony@italianoaj.com"
 FP.close()
 
 #get email password

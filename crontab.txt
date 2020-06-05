@@ -1,1 +1,3 @@
-45 * * * * cd /home/italianoaj/projects/okta-influxdb && python3 getOktaLogs.py > /logs/cron.txt
+*/5 * * * * cd /home/italianoaj/projects/okta-influxdb && python3 getOktaLogs.py > /logs/cron.txt
+
+// Makes the program run every 5 minutes, redirects output ro /logs.cron.txt
