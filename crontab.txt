@@ -1,1 +1,1 @@
-55 * * * * cd /home/italianoaj/projects/okta-influxdb && python3 getOktaLogs.py > /logs/cron.txt && date > /logs/cron.txt
+45 * * * * cd /home/italianoaj/projects/okta-influxdb && python3 getOktaLogs.py > /logs/cron.txt

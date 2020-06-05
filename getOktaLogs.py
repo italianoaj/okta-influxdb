@@ -5,6 +5,9 @@ import requests
 import json
 import sys
 import smtplib
+from datetime import datetime
+
+now=datetime.now()
 
 #set desired mail server
 mailserver='smtp.gmail.com'
@@ -27,8 +30,9 @@ FP=open('../sec/api-tok-okta', 'r')
 token=FP.readline()
 FP.close()
 
-#Print Token(testing)
+#Print Token(logs)
 print(token)
+print(now)
 
 #Open log file
 FP=open('/logs/test.log', 'w')
