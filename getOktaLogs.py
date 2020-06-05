@@ -35,7 +35,7 @@ print(token)
 print(now)
 
 #Open log file
-FP=open('/logs/test.log', 'w')
+FP=open('/logs/okta.json', 'w')
 
 #Make API request
 url = "https://[DOMAIN].okta.com/api/v1/logs"
@@ -55,7 +55,7 @@ mail.ehlo()
 mail.starttls()
 mail.login(address.strip(), password.strip())
 header = 'To: ' +to+ '\n' + 'From: ' +address+ '\n' + 'Subject:Okta Logs Recorded\n'
-msg=header+"\n Logs have been successfully placed at /logs/test.log"
+msg=header+"\n Logs have been successfully placed at /logs/okta.json"
 mail.sendmail(address,to,msg)
 
 #Close mail service
