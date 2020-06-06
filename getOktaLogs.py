@@ -38,7 +38,7 @@ print(now)
 FP=open('/logs/okta.json', 'w')
 
 #Make API request
-url = "https://[DOMAIN].okta.com/api/v1/logs"
+url = "https://stratos.okta.com/api/v1/logs"
 payload = ""
 head={'Content-Type':'application/json',
 	'Accept':'application/json',
