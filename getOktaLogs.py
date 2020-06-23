@@ -35,7 +35,7 @@ print(token)
 print(now)
 
 #Open log file
-FP=open('../sec/okta.json', 'w')
+FP=open('../sec/okta.json', 'w+')
 
 #Make API request
 url = "https://stratos.okta.com/api/v1/logs"
@@ -49,16 +49,21 @@ req=requests.request("GET", url, data=payload, headers=head)
 
 #Store logs in log file
 print(req.text, file=FP)
-#Email notification
+FP.close()
 
+#Parse out uneeded log information
+FP=open('../sec/okta.json',)
 FW=open('../sec/parsed_logs.json', 'w')
-okta = json.loads(fp.read())
-
+okta = json.loads(FP.read())
 
 for i in okta:
-    info='"event":{"user":"'+i['actor']['displayName']+'","email_address":"'+i['actor']['alternateId']+'","ip_address":"'+i['client']['ipAddress']+'","state":"'+i['client']['geographicalContext']['state']+'","country":"'+i['client']['geographicalContext']['country']+'","outcome":"'+i['outcome']['result']+'","date":"'+i['published']+'"}\n'
-    FW.write(info)
+	try:
+		info='"event":{"user":"'+i['actor']['displayName']+'","email_address":"'+i['actor']['alternateId']+'","ip_address":"'+i['client']['ipAddress']+'","state":"'+i['client']['geographicalContext']['state']+'","country":"'+i['client']['geographicalContext']['country']+'","outcome":"'+i['outcome']['result']+'","date":"'+i['published']+'"}\n'
+		FW.write(info)
+	except:
+		continue
 
+#Email notification
 mail.ehlo()
 mail.starttls()
 mail.login(address.strip(), password.strip())
@@ -75,4 +80,3 @@ FW.close()
 
 #Exit program
 sys.exit()
-
