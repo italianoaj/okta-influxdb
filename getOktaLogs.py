@@ -55,13 +55,20 @@ FP.close()
 FP=open('../sec/okta.json',)
 FW=open('../sec/parsed_okta.json', 'w')
 okta = json.loads(FP.read())
-
-for i in okta:
+FW.write('{"logs":{')
+num=0
+for i in okta[:-1]:
 	try:
-		info='{"event":{"user":"'+i['actor']['displayName']+'","email_address":"'+i['actor']['alternateId']+'","ip_address":"'+i['client']['ipAddress']+'","state":"'+i['client']['geographicalContext']['state']+'","country":"'+i['client']['geographicalContext']['country']+'","outcome":"'+i['outcome']['result']+'","date":"'+i['published']+'"}}\n'
+		info='"event'+str(num)+'":{"user":"'+i['actor']['displayName']+'","email_address":"'+i['actor']['alternateId']+'","ip_address":"'+i['client']['ipAddress']+'","state":"'+i['client']['geographicalContext']['state']+'","country":"'+i['client']['geographicalContext']['country']+'","outcome":"'+i['outcome']['result']+'","date":"'+i['published']+'"},\n'
 		FW.write(info)
 	except:
 		continue
+	num=num+1
+else:
+	info='"event'+str(num)+'":{"user":"'+i['actor']['displayName']+'","email_address":"'+i['actor']['alternateId']+'","ip_address":"'+i['client']['ipAddress']+'","state":"'+i['client']['geographicalContext']['state']+'","country":"'+i['client']['geographicalContext']['country']+'","outcome":"'+i['outcome']['result']+'","date":"'+i['published']+'"}\n'
+	FW.write(info)
+
+FW.write("}}")
 
 #Email notification
 mail.ehlo()
