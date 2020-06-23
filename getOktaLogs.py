@@ -35,7 +35,7 @@ print(token)
 print(now)
 
 #Open log file
-FP=open('/logs/okta.json', 'w')
+FP=open('../sec/okta.json', 'w')
 
 #Make API request
 url = "https://stratos.okta.com/api/v1/logs"
@@ -51,6 +51,14 @@ req=requests.request("GET", url, data=payload, headers=head)
 print(req.text, file=FP)
 #Email notification
 
+FW=open('../sec/parsed_logs.json', 'w')
+okta = json.loads(fp.read())
+
+
+for i in okta:
+    info='"event":{"user":"'+i['actor']['displayName']+'","email_address":"'+i['actor']['alternateId']+'","ip_address":"'+i['client']['ipAddress']+'","state":"'+i['client']['geographicalContext']['state']+'","country":"'+i['client']['geographicalContext']['country']+'","outcome":"'+i['outcome']['result']+'","date":"'+i['published']+'"}\n'
+    FW.write(info)
+
 mail.ehlo()
 mail.starttls()
 mail.login(address.strip(), password.strip())
@@ -63,6 +71,7 @@ mail.close()
 
 #Close Log File
 FP.close()
+FW.close()
 
 #Exit program
 sys.exit()
