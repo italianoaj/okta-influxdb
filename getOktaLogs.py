@@ -53,7 +53,7 @@ FP.close()
 
 #Parse out uneeded log information
 FP=open('../sec/okta.json',)
-FW=open('../sec/parsed_logs.json', 'w')
+FW=open('../sec/parsed_okta.json', 'w')
 okta = json.loads(FP.read())
 
 for i in okta:
@@ -68,7 +68,7 @@ mail.ehlo()
 mail.starttls()
 mail.login(address.strip(), password.strip())
 header = 'To: ' +to+ '\n' + 'From: ' +address+ '\n' + 'Subject:Okta Logs Recorded\n'
-msg=header+"\n Logs have been successfully placed at /logs/okta.json"
+msg=header+"\n Logs have been successfully placed at /home/italianoaj/projects/sec/parsed_okta.json"
 mail.sendmail(address,to,msg)
 
 #Close mail service
